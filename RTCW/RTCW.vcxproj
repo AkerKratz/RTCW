@@ -82,7 +82,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -121,8 +121,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AdMain.cpp" />
     <ClCompile Include="Auth.cpp" />
     <ClCompile Include="Info.cpp" />
+    <ClCompile Include="Info1.cpp" />
+    <ClCompile Include="InfoStudent.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Questions.cpp" />
@@ -132,10 +135,16 @@
     <ClCompile Include="TestSet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdMain.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Auth.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Info.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="InfoStudent.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Intro.h">
@@ -150,6 +159,7 @@
     <ClInclude Include="Results.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Structure.h" />
     <ClInclude Include="Test.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -158,11 +168,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AdMain.resx">
+      <DependentUpon>AdMain.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auth.resx">
       <DependentUpon>Auth.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoStudent.resx">
+      <DependentUpon>InfoStudent.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Intro.resx">
       <DependentUpon>Intro.h</DependentUpon>

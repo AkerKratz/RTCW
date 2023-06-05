@@ -1,3 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <msclr\marshal.h>
+#include <msclr/marshal_cppstd.h>
+#include "Structure.h"
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cstdlib> 
+#include <ctime> 
+#include <algorithm>
+#include <iostream>
+#include <fstream>
+#include <regex>
 #pragma once
 
 namespace RTCW {
@@ -15,12 +30,14 @@ namespace RTCW {
 	public ref class Results : public System::Windows::Forms::Form
 	{
 	public:
-		Results(void)
+
+		String^ student;
+
+		Results(String^ s)
 		{
+
+			student = s;
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
@@ -34,22 +51,17 @@ namespace RTCW {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Label^ name_label;
 	protected:
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::RadioButton^ radioButton5;
-	private: System::Windows::Forms::RadioButton^ radioButton4;
-	private: System::Windows::Forms::RadioButton^ radioButton3;
-	private: System::Windows::Forms::RadioButton^ radioButton2;
-	private: System::Windows::Forms::RadioButton^ radioButton1;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button5;
-	private: System::Windows::Forms::ComboBox^ TestSelection;
 
+	private: System::Windows::Forms::Label^ mark_label;
+	protected:
+
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ correct_mis_label;
+
+	protected:
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -63,179 +75,158 @@ namespace RTCW {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->radioButton5 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton4 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton3 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->name_label = (gcnew System::Windows::Forms::Label());
+			this->mark_label = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->TestSelection = (gcnew System::Windows::Forms::ComboBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->correct_mis_label = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
-			// button4
+			// name_label
 			// 
-			this->button4->Location = System::Drawing::Point(324, 316);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
-			this->button4->TabIndex = 25;
-			this->button4->Text = L"clear";
-			this->button4->UseVisualStyleBackColor = true;
+			this->name_label->AutoSize = true;
+			this->name_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->name_label->Location = System::Drawing::Point(213, 42);
+			this->name_label->Name = L"name_label";
+			this->name_label->Size = System::Drawing::Size(81, 25);
+			this->name_label->TabIndex = 0;
+			this->name_label->Text = L"Name: ";
 			// 
-			// label2
+			// mark_label
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(113, 66);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(58, 16);
-			this->label2->TabIndex = 24;
-			this->label2->Text = L"TaskList";
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(315, 110);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(100, 22);
-			this->textBox2->TabIndex = 23;
-			// 
-			// radioButton5
-			// 
-			this->radioButton5->AutoSize = true;
-			this->radioButton5->Location = System::Drawing::Point(312, 279);
-			this->radioButton5->Name = L"radioButton5";
-			this->radioButton5->Size = System::Drawing::Size(103, 20);
-			this->radioButton5->TabIndex = 21;
-			this->radioButton5->TabStop = true;
-			this->radioButton5->Text = L"radioButton5";
-			this->radioButton5->UseVisualStyleBackColor = true;
-			// 
-			// radioButton4
-			// 
-			this->radioButton4->AutoSize = true;
-			this->radioButton4->Location = System::Drawing::Point(312, 253);
-			this->radioButton4->Name = L"radioButton4";
-			this->radioButton4->Size = System::Drawing::Size(103, 20);
-			this->radioButton4->TabIndex = 20;
-			this->radioButton4->TabStop = true;
-			this->radioButton4->Text = L"radioButton4";
-			this->radioButton4->UseVisualStyleBackColor = true;
-			// 
-			// radioButton3
-			// 
-			this->radioButton3->AutoSize = true;
-			this->radioButton3->Location = System::Drawing::Point(312, 227);
-			this->radioButton3->Name = L"radioButton3";
-			this->radioButton3->Size = System::Drawing::Size(103, 20);
-			this->radioButton3->TabIndex = 19;
-			this->radioButton3->TabStop = true;
-			this->radioButton3->Text = L"radioButton3";
-			this->radioButton3->UseVisualStyleBackColor = true;
-			// 
-			// radioButton2
-			// 
-			this->radioButton2->AutoSize = true;
-			this->radioButton2->Location = System::Drawing::Point(312, 201);
-			this->radioButton2->Name = L"radioButton2";
-			this->radioButton2->Size = System::Drawing::Size(103, 20);
-			this->radioButton2->TabIndex = 18;
-			this->radioButton2->TabStop = true;
-			this->radioButton2->Text = L"radioButton2";
-			this->radioButton2->UseVisualStyleBackColor = true;
-			// 
-			// radioButton1
-			// 
-			this->radioButton1->AutoSize = true;
-			this->radioButton1->Location = System::Drawing::Point(312, 175);
-			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(103, 20);
-			this->radioButton1->TabIndex = 17;
-			this->radioButton1->TabStop = true;
-			this->radioButton1->Text = L"radioButton1";
-			this->radioButton1->UseVisualStyleBackColor = true;
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(315, 138);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 22);
-			this->textBox1->TabIndex = 16;
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(611, 66);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
-			this->button3->TabIndex = 15;
-			this->button3->Text = L"finish";
-			this->button3->UseVisualStyleBackColor = true;
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(470, 416);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 14;
-			this->button2->Text = L"next";
-			this->button2->UseVisualStyleBackColor = true;
+			this->mark_label->AutoSize = true;
+			this->mark_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->mark_label->Location = System::Drawing::Point(448, 42);
+			this->mark_label->Name = L"mark_label";
+			this->mark_label->Size = System::Drawing::Size(82, 25);
+			this->mark_label->TabIndex = 1;
+			this->mark_label->Text = L"Score: ";
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(182, 416);
+			this->button1->Location = System::Drawing::Point(262, 416);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 13;
-			this->button1->Text = L"previous";
+			this->button1->Size = System::Drawing::Size(155, 51);
+			this->button1->TabIndex = 2;
+			this->button1->Text = L"Back";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Results::button1_Click);
 			// 
-			// button5
+			// label1
 			// 
-			this->button5->Location = System::Drawing::Point(311, 485);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(104, 23);
-			this->button5->TabIndex = 26;
-			this->button5->Text = L"Main Menu";
-			this->button5->UseVisualStyleBackColor = true;
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(229, 207);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(236, 25);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"CORRECT/MISTAKES";
 			// 
-			// TestSelection
+			// correct_mis_label
 			// 
-			this->TestSelection->FormattingEnabled = true;
-			this->TestSelection->Location = System::Drawing::Point(311, 12);
-			this->TestSelection->Name = L"TestSelection";
-			this->TestSelection->Size = System::Drawing::Size(121, 24);
-			this->TestSelection->TabIndex = 28;
+			this->correct_mis_label->AutoSize = true;
+			this->correct_mis_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->correct_mis_label->Location = System::Drawing::Point(310, 263);
+			this->correct_mis_label->Name = L"correct_mis_label";
+			this->correct_mis_label->Size = System::Drawing::Size(43, 25);
+			this->correct_mis_label->TabIndex = 1;
+			this->correct_mis_label->Text = L"0/0";
 			// 
 			// Results
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(739, 540);
-			this->Controls->Add(this->TestSelection);
-			this->Controls->Add(this->button5);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->radioButton5);
-			this->Controls->Add(this->radioButton4);
-			this->Controls->Add(this->radioButton3);
-			this->Controls->Add(this->radioButton2);
-			this->Controls->Add(this->radioButton1);
-			this->Controls->Add(this->textBox1);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
+			this->Controls->Add(this->correct_mis_label);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->mark_label);
+			this->Controls->Add(this->name_label);
 			this->Name = L"Results";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Results";
+			this->Load += gcnew System::EventHandler(this, &Results::Results_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+		int CountRandStructuresInFile() {
+			FILE* file;
+			S_Data data;
+			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\rand_questions.bin", "rb");
+			int count = 0;
+
+			while (fread(&data, sizeof(data), 1, file) == 1) {
+				count++;
+			}
+			return count;
+		}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+
+
+private: System::Void Results_Load(System::Object^ sender, System::EventArgs^ e) {
+	std::ifstream file1("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\result_testing.txt");
+	std::regex loginRegex(R"(.*login:(.+))", std::regex_constants::icase);
+	std::regex dataRegex(R"(.*(Questions|Correct|Mistakes|Mark):(\d+))", std::regex_constants::icase);
+
+	std::string login;
+	int closestQuestions = 0;
+	int closestCorrect = 0;
+	int closestMistakes = 0;
+	int closestMark = 0;
+
+	std::string line;
+	while (std::getline(file1, line)) {
+		std::smatch match;
+
+		if (std::regex_search(line, match, loginRegex)) {
+			login = match[1].str();
+			continue; // Продовжуємо до наступного рядка після знаходження логіну
+		}
+
+		String^ student_login = msclr::interop::marshal_as<String^>(login);
+		if (student_login == student) {
+			if (std::regex_search(line, match, dataRegex)) {
+				std::string term = match[1].str();
+				int value = std::stoi(match[2].str());
+
+				if (term == "Correct") {
+					if (closestCorrect == 0 || std::abs(value - closestCorrect) < std::abs(value - closestCorrect)) { // перевіряється, чи нове значення помилок value ближче до поточного найближчого значення помилок closestMistakes
+						closestCorrect = value;
+					}
+				}
+				else if (term == "Mistakes") {
+					if (closestMistakes == 0 || std::abs(value - closestMistakes) < std::abs(value - closestMistakes)) { // перевіряється, чи нове значення помилок value ближче до поточного найближчого значення помилок closestMistakes
+						closestMistakes = value;
+					}
+				}
+				else if (term == "Mark") {
+					int roundedMark = static_cast<int>(std::round(value)); // Округлити значення Mark до цілого числа
+					if (closestMark == 0 || std::abs(roundedMark - closestMark) < std::abs(roundedMark - closestMark)) { // перевіряється, чи нове значення оцінки value ближче до поточного найближчого значення оцінки closestMark
+						closestMark = roundedMark;
+					}
+				}
+			}
+		}
+	}
+
+	int mark = closestMark;
+	int correct = closestCorrect;
+	int mistakes = closestMistakes;
+
+	mark_label->Text = "Score: " + mark.ToString();
+	name_label->Text = "Name: " + student;
+
+	correct_mis_label->Text = correct.ToString() + "/" + mistakes.ToString();
+
+	file1.close();
+}
+};
 }

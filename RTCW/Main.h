@@ -1,11 +1,25 @@
-#pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include "Test.h"
 #include "Results.h"
-#include "TestSet.h"
-#include "Auth.h"
 #include "Intro.h"
-#include "Questions.h"
-#include "Info.h"
+#include "InfoStudent.h"
+#include "Test.h"
+#include "Results.h"
+#include "Structure.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <msclr\marshal.h>
+#include <msclr/marshal_cppstd.h>
+#include <fstream>
+#include <vector>
+#include <cstdlib> 
+#include <ctime> 
+#include <algorithm>
+#include <iostream>
+#include <regex>
+#include <random>
+#pragma once
 
 namespace RTCW {
 
@@ -22,12 +36,12 @@ namespace RTCW {
 	public ref class Main : public System::Windows::Forms::Form
 	{
 	public:
-		Main(void)
+		String^ name;
+
+		Main(String^ s)
 		{
+			name = s;
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
@@ -43,12 +57,13 @@ namespace RTCW {
 		}
 	private: System::Windows::Forms::Button^ button1;
 	protected:
-	private: System::Windows::Forms::Button^ button2;
+
 	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button4;
+
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
 	private: System::Windows::Forms::Button^ button7;
+	private: System::Windows::Forms::Label^ name_label;
 
 	private:
 		/// <summary>
@@ -64,17 +79,16 @@ namespace RTCW {
 		void InitializeComponent(void)
 		{
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->name_label = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(345, 101);
+			this->button1->Location = System::Drawing::Point(348, 152);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(101, 23);
 			this->button1->TabIndex = 0;
@@ -82,19 +96,9 @@ namespace RTCW {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Main::button1_Click);
 			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(345, 154);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(101, 23);
-			this->button2->TabIndex = 1;
-			this->button2->Text = L"Test settings";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &Main::button2_Click);
-			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(345, 211);
+			this->button3->Location = System::Drawing::Point(348, 199);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(101, 23);
 			this->button3->TabIndex = 2;
@@ -102,19 +106,9 @@ namespace RTCW {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &Main::button3_Click);
 			// 
-			// button4
-			// 
-			this->button4->Location = System::Drawing::Point(345, 274);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(101, 23);
-			this->button4->TabIndex = 3;
-			this->button4->Text = L"Questions";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &Main::button4_Click);
-			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(345, 327);
+			this->button5->Location = System::Drawing::Point(348, 245);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(101, 23);
 			this->button5->TabIndex = 4;
@@ -124,7 +118,7 @@ namespace RTCW {
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(360, 370);
+			this->button6->Location = System::Drawing::Point(361, 288);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(75, 23);
 			this->button6->TabIndex = 5;
@@ -134,7 +128,7 @@ namespace RTCW {
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(345, 411);
+			this->button7->Location = System::Drawing::Point(348, 333);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(106, 23);
 			this->button7->TabIndex = 6;
@@ -142,57 +136,131 @@ namespace RTCW {
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &Main::button7_Click);
 			// 
+			// name_label
+			// 
+			this->name_label->AutoSize = true;
+			this->name_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->name_label->Location = System::Drawing::Point(12, 9);
+			this->name_label->Name = L"name_label";
+			this->name_label->Size = System::Drawing::Size(81, 25);
+			this->name_label->TabIndex = 7;
+			this->name_label->Text = L"Name: ";
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(795, 541);
+			this->Controls->Add(this->name_label);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
-			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Name = L"Main";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Main";
 			this->Load += gcnew System::EventHandler(this, &Main::Main_Load);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
-
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		Test^ test = gcnew Test(); // Create an instance of Form2
-		this->Hide();
-		test->ShowDialog(); // Show Form2
-		this->Show();
+		int time = 0;
+		private: System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
+			name_label->Text = name;
+			Test_Data testreq;
+			FILE* file;
+			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\test_settings.txt", "r");
+			fread(&testreq, sizeof(testreq), 1, file);
+			fclose(file);
+			time = testreq.question_time;
 		}
 
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		TestSet^ testset = gcnew TestSet(); // Create an instance of Form2
+
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Hide();
-		testset->ShowDialog(); // Show Form2
-		this->Show();
-}
+		System::Windows::Forms::DialogResult result = MessageBox::Show("Час тестування обмежений, а саме " + time.ToString() + "хв бажаєте продовжити?", "Підтвердження", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+
+		std::ifstream file1("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\result_testing.txt");
+		std::regex loginRegex(R"(login:(.+))", std::regex_constants::icase);
+
+		std::string login;
+
+
+		std::string line;
+		while (std::getline(file1, line)) {
+			std::smatch match;
+
+			if (std::regex_search(line, match, loginRegex)) {
+				login = match[1];
+			}
+		}
+		String^ login_r = marshal_as<String^>(login);
+
+
+		if (login_r == name) {
+			MessageBox::Show("Ви вже пройшли тестування!", "Помилка!");
+		}
+		else {
+			FILE* file;
+			Test_Data testreq;
+			file = fopen("another_data\\user_answers.bin", "wb");
+			fclose(file);
+			std::ifstream inputFile("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\questions.bin", std::ios::binary); // Читання з файлу
+			if (!inputFile) {
+				MessageBox::Show("Немає файлу", "А де?");
+			}
+			std::vector<S_Data> questions;
+			S_Data question;
+
+			while (inputFile.read(reinterpret_cast<char*>(&question), sizeof(question))) {
+				questions.push_back(question);
+			}
+			inputFile.close();
+
+			std::vector<size_t> indices(questions.size()); // Створюється масив індексів
+			for (size_t i = 0; i < indices.size(); ++i) { // Розмір масиву це розмір масиву індексів - розмір масиву структур
+				indices[i] = i;
+			}
+
+			std::random_device rd;// rd - змінна, в яку записується непередбачуване випадкове число
+			std::mt19937 generator(rd());// Ініціалізація генератора псевдовипадкових чисел на основі алгоритму Вихор Мерсенна
+			std::shuffle(indices.begin(), indices.end(), generator);// Перемішування елементів в заданому діапазоні генератором випадкових чисел
+
+			std::ofstream outputFile("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\rand_questions.bin", std::ios::binary);
+
+			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\test_settings.txt", "r");
+			fread(&testreq, sizeof(testreq), 1, file);
+			fclose(file);
+
+			for (size_t i = 0; i < testreq.qc; ++i) { // Вказуємо к-сть питать задану адміністратором
+				const auto& q = questions[indices[i]];
+				outputFile.write(reinterpret_cast<const char*>(&q), sizeof(q));
+			}
+
+			file1.close();
+			outputFile.close();
+
+			this->Hide();
+			Test^ testForm = gcnew Test(name);
+			testForm->ShowDialog();
+			this->Show();
+		}
+		}
+
 
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		Info^ info = gcnew Info(); // Create an instance of Form2
+		InfoStudent^ infoForm = gcnew InfoStudent();
 		this->Hide();
-		info->ShowDialog(); // Show Form2
+		infoForm->ShowDialog();
 		this->Show();
-}
-
-	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-		Questions^ questions = gcnew Questions(); // Create an instance of Form2
-		this->Hide();
-		questions->ShowDialog(); // Show Form2
-		this->Show();
-}
+	}
 
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-		Results^ results = gcnew Results(); // Create an instance of Form2
+		Results^ results = gcnew Results(name); // Create an instance of Form2
 		this->Hide();
 		results->ShowDialog(); // Show Form2
 		this->Show();
@@ -206,12 +274,8 @@ namespace RTCW {
 }
 
 private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
-	Auth^ auth = gcnew Auth(); // Create an instance of Form2
-	this->Hide();
-	auth->ShowDialog(); // Show Form2
 	this->Close();
 }
-private: System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
-}
+
 };
 }

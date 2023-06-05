@@ -10,12 +10,12 @@ namespace RTCW {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Summary for Info
+	/// Summary for InfoStudent
 	/// </summary>
-	public ref class Info : public System::Windows::Forms::Form
+	public ref class InfoStudent : public System::Windows::Forms::Form
 	{
 	public:
-		Info(void)
+		InfoStudent(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace RTCW {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~Info()
+		~InfoStudent()
 		{
 			if (components)
 			{
@@ -35,12 +35,7 @@ namespace RTCW {
 			}
 		}
 	private: System::Windows::Forms::RichTextBox^ richTextBox1;
-
-	private: System::Windows::Forms::Button^ save_btn;
-	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
-
-
-
+	private: System::Windows::Forms::Button^ button1;
 	protected:
 
 	private:
@@ -57,63 +52,56 @@ namespace RTCW {
 		void InitializeComponent(void)
 		{
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
-			this->save_btn = (gcnew System::Windows::Forms::Button());
-			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// richTextBox1
 			// 
 			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->richTextBox1->Location = System::Drawing::Point(12, 69);
+			this->richTextBox1->Location = System::Drawing::Point(12, 66);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(758, 472);
+			this->richTextBox1->Size = System::Drawing::Size(758, 475);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = L"";
 			// 
-			// save_btn
+			// button1
 			// 
-			this->save_btn->Location = System::Drawing::Point(278, 12);
-			this->save_btn->Name = L"save_btn";
-			this->save_btn->Size = System::Drawing::Size(111, 39);
-			this->save_btn->TabIndex = 1;
-			this->save_btn->Text = L"Save";
-			this->save_btn->UseVisualStyleBackColor = true;
-			this->save_btn->Click += gcnew System::EventHandler(this, &Info::save_btn_Click);
+			this->button1->Location = System::Drawing::Point(292, 12);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(175, 34);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"Back";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &InfoStudent::button1_Click);
 			// 
-			// openFileDialog1
-			// 
-			this->openFileDialog1->FileName = L"openFileDialog1";
-			// 
-			// Info
+			// InfoStudent
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(782, 553);
-			this->Controls->Add(this->save_btn);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->richTextBox1);
-			this->Name = L"Info";
+			this->Name = L"InfoStudent";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Info";
+			this->Text = L"InfoStudent";
+			this->Load += gcnew System::EventHandler(this, &InfoStudent::InfoStudent_Load);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 
-	private: System::Void save_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ text = richTextBox1->Text;
+
+	private: System::Void InfoStudent_Load(System::Object^ sender, System::EventArgs^ e) {
 		String^ fileName = "another_data\\info.txt";
-		try
-		{
-			System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter(fileName);
-			sw->Write(text);
-			sw->Close();
-			MessageBox::Show("Saved successfully", "Succes!");
-		}
-		catch (System::Exception^ ex)
-		{
-			MessageBox::Show("Error occurred while saving the file: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
+		System::IO::StreamReader^ sr = gcnew System::IO::StreamReader(fileName);
+		String^ text = sr->ReadToEnd();
+		sr->Close();
+		richTextBox1->Text = text;
+		richTextBox1->ReadOnly = true;
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
 	}
 	};
 }
