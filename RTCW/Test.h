@@ -204,9 +204,10 @@ namespace RTCW {
 			this->questions_label->AutoSize = true;
 			this->questions_label->Location = System::Drawing::Point(293, 28);
 			this->questions_label->Name = L"questions_label";
-			this->questions_label->Size = System::Drawing::Size(66, 16);
+			this->questions_label->Size = System::Drawing::Size(70, 16);
 			this->questions_label->TabIndex = 29;
-			this->questions_label->Text = L"Питання ";
+			this->questions_label->Text = L"Somewhat";
+			this->questions_label->Click += gcnew System::EventHandler(this, &Test::questions_label_Click);
 			// 
 			// save_answers_button
 			// 
@@ -367,7 +368,7 @@ namespace RTCW {
 
 			FILE* file;
 			S_Data data;
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", "rb");
+			file = fopen("another_data\\user_answers.bin", "rb");
 			int count = 0;
 
 			while (fread(&data, sizeof(data), 1, file) == 1) {
@@ -378,7 +379,7 @@ namespace RTCW {
 		int CountRandStructuresInFile() {
 			FILE* file;
 			S_Data data;
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\rand_questions.bin", "rb");
+			file = fopen("another_data\\rand_questions.bin", "rb");
 			int count = 0;
 
 			while (fread(&data, sizeof(data), 1, file) == 1) {
@@ -413,8 +414,8 @@ namespace RTCW {
 		void setAnswerRight(int pos) {
 			FILE* file;
 			S_Data data;
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", "rb");
-			fseek(file, pos * sizeof(data), SEEK_SET); // Переміщення до потрібної позиції
+			file = fopen("another_data\\user_answers.bin", "rb");
+			fseek(file, pos * sizeof(data), SEEK_SET);
 
 			if (fread(&data, sizeof(data), 1, file) == 1) {
 				auto_check_radio(data.answer);
@@ -428,8 +429,8 @@ namespace RTCW {
 		void StructurePositionRight(int pos) {
 			FILE* file;
 			S_Data data;
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\rand_questions.bin", "rb");
-			fseek(file, pos * sizeof(data), SEEK_SET); // Переміщення до потрібної позиції
+			file = fopen("another_data\\rand_questions.bin", "rb");
+			fseek(file, pos * sizeof(data), SEEK_SET); 
 			if (fread(&data, sizeof(data), 1, file) == 1) {
 				question_box->Text = marshal_as<String^>(data.question);
 				question_A->Text = marshal_as<String^>(data.v1);
@@ -438,7 +439,7 @@ namespace RTCW {
 				question_D->Text = marshal_as<String^>(data.v4);
 			}
 			else {
-				right_button->Enabled = false; // Вимкнути кнопку "вперед" у разі відсутності структури
+				right_button->Enabled = false;
 			}
 			fclose(file);
 		}	
@@ -448,8 +449,8 @@ namespace RTCW {
 		void StructurePositionLeft(int pos) {
 			FILE* file;
 			S_Data data;
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\rand_questions.bin", "rb");
-			fseek(file, pos * sizeof(data), SEEK_SET); // Переміщення до потрібної позиції
+			file = fopen("another_data\\rand_questions.bin", "rb");
+			fseek(file, pos * sizeof(data), SEEK_SET);
 
 			if (fread(&data, sizeof(data), 1, file) == 1) {
 				question_box->Text = marshal_as<String^>(data.question);
@@ -459,7 +460,7 @@ namespace RTCW {
 				question_D->Text = marshal_as<String^>(data.v4);
 			}
 			else {
-				left_button->Enabled = false; // Вимкнути кнопку "назад" у разі відсутності структури
+				left_button->Enabled = false;
 			}
 			fclose(file);
 		}
@@ -467,14 +468,14 @@ namespace RTCW {
 		void setAnswerLeft(int pos) {
 			FILE* file;
 			S_Data data;
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", "rb");
-			fseek(file, pos * sizeof(data), SEEK_SET); // Переміщення до потрібної позиції
+			file = fopen("another_data\\user_answers.bin", "rb");
+			fseek(file, pos * sizeof(data), SEEK_SET);
 
 			if (fread(&data, sizeof(data), 1, file) == 1) {
 				auto_check_radio(data.answer);
 			}
 			else {
-				left_button->Enabled = false; // Вимкнути кнопку "назад" у разі відсутності структури
+				left_button->Enabled = false;
 			}
 			fclose(file);
 		}
@@ -517,8 +518,8 @@ private: System::Void Test_Load(System::Object^ sender, System::EventArgs^ e) {
 	timer1->Start();
 	FILE* file;
 	S_Data data;
-	file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\rand_questions.bin", "rb");
-	fread(&data, sizeof(data), 1, file);//читання з файлу
+	file = fopen("another_data\\rand_questions.bin", "rb");
+	fread(&data, sizeof(data), 1, file);
 	question_box->Text = marshal_as<String^>(data.question);
 	question_A->Text = marshal_as<String^>(data.v1);
 	question_B->Text = marshal_as<String^>(data.v2);
@@ -535,13 +536,13 @@ private: System::Void Test_Load(System::Object^ sender, System::EventArgs^ e) {
 		right_button->Enabled = true;
 		left_button->Enabled = false;
 	}
-	this->questions_label->Text = "Питання " + count.ToString() + " / " + CountRandStructuresInFile().ToString();
+	this->questions_label->Text = "Task " + count.ToString() + " / " + CountRandStructuresInFile().ToString();
 	if (count >= CountRandStructuresInFile()) {
 		right_button->Enabled = false;
 	}
 
 	Test_Data testreq;
-	file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\test_settings.txt", "r");
+	file = fopen("another_data\\test_settings.txt", "r");
 	fread(&testreq, sizeof(testreq), 1, file);
 	fclose(file);
 	time = testreq.question_time;
@@ -557,7 +558,6 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 		S_Data data;
 		if (what_answer() != 0)
 		{
-			//заповнення структури даних для тесту
 			strcpy(data.question, (char*)(void*)Marshal::StringToHGlobalAnsi(question_box->Text));
 			strcpy(data.v1, (char*)(void*)Marshal::StringToHGlobalAnsi(question_A->Text));
 			strcpy(data.v2, (char*)(void*)Marshal::StringToHGlobalAnsi(question_B->Text));
@@ -567,20 +567,20 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 			int answer = what_answer();
 			data.answer = answer;
 
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", "r+b");
+			file = fopen("another_data\\user_answers.bin", "r+b");
 			if (file != NULL) {
-				fseek(file, currentPos * sizeof(data), SEEK_SET); // Переміщення до позиції структури, яку треба замінити
-				fwrite(&data, sizeof(data), 1, file); // Запис нової структури
+				fseek(file, currentPos * sizeof(data), SEEK_SET);
+				fwrite(&data, sizeof(data), 1, file); 
 				fclose(file);
 			}
 
 			++count;
-			this->questions_label->Text = "Питання " + count.ToString() + " / " + CountRandStructuresInFile().ToString();
+			this->questions_label->Text = "Task " + count.ToString() + " / " + CountRandStructuresInFile().ToString();
 			if (currentPos < totalStructures) {
-				currentPos++; // Збільшуємо поточну позицію
+				currentPos++;
 
 				StructurePositionRight(currentPos);
-				left_button->Enabled = true; // Увімкнути кнопку "назад", якщо ще доступні структури
+				left_button->Enabled = true;
 
 				if (currentPos >= totalStructures - 1) {
 					right_button->Enabled = false;
@@ -593,9 +593,9 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 			}
 		}
 		else {
-			MessageBox::Show("Оберіть варіант відповіді!", "Помилка");
+			MessageBox::Show("answer isn`t choosen!", "Error");
 		}
-		file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", "rb");
+		file = fopen("another_data\\user_answers.bin", "rb");
 		if (fread(&data, sizeof(data), 1, file) == 1) {
 			fread(&data, sizeof(data), 1, file);
 			setAnswerRight(currentPos);
@@ -608,18 +608,18 @@ private: System::Void left_button_Click(System::Object ^ sender, System::EventAr
 	FILE* file;
 	S_Data data;
 	if (currentPos > 0) {
-		currentPos--; // Зменшуємо поточну позицію
+		currentPos--; 
 		StructurePositionLeft(currentPos);
 		right_button->Enabled = true;
 		this->save_answers_button->Visible = false;
 
 		if (currentPos <= 0) {
-			left_button->Enabled = false;// Вимкнути кнопку "назад", якщо досягнуто початку файлу
+			left_button->Enabled = false;
 		}
 		count--;
-		this->questions_label->Text = "Питання " + count.ToString() + " / " + CountRandStructuresInFile().ToString();
+		this->questions_label->Text = "Task " + count.ToString() + " / " + CountRandStructuresInFile().ToString();
 	}
-	file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", "rb");
+	file = fopen("another_data\\user_answers.bin", "rb");
 	if (fread(&data, sizeof(data), 1, file) == 1) {
 		fread(&data, sizeof(data), 1, file);
 		setAnswerLeft(currentPos);
@@ -631,20 +631,20 @@ private: System::Void left_button_Click(System::Object ^ sender, System::EventAr
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) { // end button
 	FILE* file;
 	Test_Data testreq;
-	file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\test_settings.txt", "r");
+	file = fopen("another_data\\test_settings.txt", "r");
 	fread(&testreq, sizeof(testreq), 1, file);
 	fclose(file);
 	if (CountUsersStructuresInFile() == testreq.qc) {
 		timer1->Stop();
-		MessageBox::Show("Ви завершили тест. Аби переглянути оцінку та іншу інформацію перейдіть в особистий кабінет.", "Тест завершено");
+		MessageBox::Show("Test is finished. Check results in \"results\"", "Well done!");
 		this->Hide();
 	}
 	else
-		MessageBox::Show("Ви не зберегли відповіді!", "Помилка!");
+		MessageBox::Show("Answer isn`t saved!", "Error!");
 
-	std::ifstream inputFile("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\questions.bin", std::ios::binary); // Читання з файлу
+	std::ifstream inputFile("another_data\\questions.bin", std::ios::binary);
 	if (!inputFile) {
-		MessageBox::Show("Не вдалося знайти файл з питаннями.", "Помилка!");
+		MessageBox::Show("Failed to open file.", "Error!");
 	}
 	std::vector<question> questions;
 	question data;
@@ -654,9 +654,9 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	inputFile.close();
 
-	std::ifstream inputFile2("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", std::ios::binary); // Читання з файлу
+	std::ifstream inputFile2("another_data\\user_answers.bin", std::ios::binary);
 	if (!inputFile2) {
-		MessageBox::Show("Не вдалося знайти файл з відповідями користувача.", "Помилка!");
+		MessageBox::Show("Failed to open file.", "Error!");
 	}
 
 	std::vector<question> answers;
@@ -683,7 +683,6 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	while (i < questionsSize && j < answersSize) {
 		int comparison = std::strcmp(questions[i].question, answers[j].question);
 		if (comparison == 0) {
-			// структури мають однакове поле question
 			if (questions[i].answer == answers[j].answer) {
 				mark += testreq.mark;
 				count_right++;
@@ -695,14 +694,14 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 			j++;
 		}
 		else if (comparison < 0) {
-			i++; // Перейти до наступної структури в векторі questions
+			i++; 
 
 		}
 		else {
-			j++; // Перейти до наступної структури в векторі answers
+			j++; 
 		}
 	}
-	std::ofstream outputFile("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\result_testing.txt", std::ios::app); // Открываем файл для записи
+	std::ofstream outputFile("another_data\\result_testing.txt", std::ios::app); 
 
 	if (outputFile) {
 		std::string student_name_str;
@@ -717,7 +716,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 		outputFile.close();
 	}
 	else {
-		MessageBox::Show("Не вдалося знайти файл для запису результатів.", "Помилка!");
+		MessageBox::Show("Failed to open file.", "Error!");
 	}
 }
 
@@ -728,7 +727,6 @@ private: System::Void save_answers_button_Click(System::Object^ sender, System::
 	FILE* file;
 	S_Data data;
 	if (right_button->Enabled == false) {
-		//заповнення структури даних для тесту
 		strcpy(data.question, (char*)(void*)Marshal::StringToHGlobalAnsi(question_box->Text));
 		strcpy(data.v1, (char*)(void*)Marshal::StringToHGlobalAnsi(question_A->Text));
 		strcpy(data.v2, (char*)(void*)Marshal::StringToHGlobalAnsi(question_B->Text));
@@ -738,11 +736,11 @@ private: System::Void save_answers_button_Click(System::Object^ sender, System::
 		int answer = what_answer();
 		data.answer = answer;
 
-		file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\user_answers.bin", "r+b");
+		file = fopen("another_data\\user_answers.bin", "r+b");
 		if (file != NULL) {
-			fseek(file, currentPos * sizeof(data), SEEK_SET); // Переміщення до позиції структури, яку треба замінити
-			fwrite(&data, sizeof(data), 1, file); // Запис нової структури
-			fclose(file);	// Вимкнути кнопку "вперед", якщо немає більше структур
+			fseek(file, currentPos * sizeof(data), SEEK_SET);
+			fwrite(&data, sizeof(data), 1, file); 
+			fclose(file);
 		}
 	}
 }
@@ -752,19 +750,19 @@ private: System::Void save_answers_button_Click(System::Object^ sender, System::
 			//timer_hv_label->Text = (timer_value / 60).ToString();
 			//timer_sec_label->Text = (timer_value % 60).ToString();
 
-			int minutes = timer_value / 60; // Обчислюємо хвилини
-			int seconds = timer_value % 60; // Обчислюємо секунди
+			int minutes = timer_value / 60; 
+			int seconds = timer_value % 60; 
 
 			String^ formattedTime = "";
 
 			if (minutes < 10) {
-				formattedTime += "0"; // Додати "0" перед значенням хвилин, якщо менше 10
+				formattedTime += "0";
 			}
 
 			formattedTime += minutes.ToString() + ":";
 
 			if (seconds < 10) {
-				formattedTime += "0"; // Додати "0" перед значенням секунд, якщо менше 10
+				formattedTime += "0"; 
 			}
 
 			formattedTime += seconds.ToString() + "";
@@ -773,9 +771,11 @@ private: System::Void save_answers_button_Click(System::Object^ sender, System::
 
 			if (timer_value >= time * 60) {
 				timer1->Stop();
-				MessageBox::Show("Час вичерпано!", "Час тестування вийшов");
+				MessageBox::Show("Time`s up!", "Test is finished");
 				this->Close();
 			}
 		}
+private: System::Void questions_label_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

@@ -51,6 +51,8 @@ namespace RTCW {
 
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
 
 	private:
 		/// <summary>
@@ -70,6 +72,8 @@ namespace RTCW {
 			this->mark_label = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// question_count_box
@@ -78,7 +82,6 @@ namespace RTCW {
 			this->question_count_box->Name = L"question_count_box";
 			this->question_count_box->Size = System::Drawing::Size(150, 22);
 			this->question_count_box->TabIndex = 0;
-			this->question_count_box->Text = L"number of qustions";
 			this->question_count_box->TextChanged += gcnew System::EventHandler(this, &TestSet::question_count_label_TextChanged);
 			// 
 			// time_box
@@ -87,13 +90,12 @@ namespace RTCW {
 			this->time_box->Name = L"time_box";
 			this->time_box->Size = System::Drawing::Size(128, 22);
 			this->time_box->TabIndex = 1;
-			this->time_box->Text = L"time";
 			this->time_box->TextChanged += gcnew System::EventHandler(this, &TestSet::time_box_TextChanged);
 			// 
 			// mark_label
 			// 
 			this->mark_label->AutoSize = true;
-			this->mark_label->Location = System::Drawing::Point(453, 247);
+			this->mark_label->Location = System::Drawing::Point(464, 257);
 			this->mark_label->Name = L"mark_label";
 			this->mark_label->Size = System::Drawing::Size(104, 16);
 			this->mark_label->TabIndex = 3;
@@ -119,11 +121,32 @@ namespace RTCW {
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &TestSet::button5_Click);
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(314, 139);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(122, 16);
+			this->label1->TabIndex = 28;
+			this->label1->Text = L"Numer of questions";
+			this->label1->Click += gcnew System::EventHandler(this, &TestSet::label1_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(635, 139);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(38, 16);
+			this->label2->TabIndex = 29;
+			this->label2->Text = L"Time";
+			// 
 			// TestSet
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1058, 542);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->mark_label);
@@ -183,6 +206,8 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 
 	fwrite(&testreq, sizeof(testreq), 1, file);
 	fclose(file);
+}
+private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

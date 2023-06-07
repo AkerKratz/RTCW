@@ -87,7 +87,7 @@ namespace RTCW {
 			this->name_label->AutoSize = true;
 			this->name_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->name_label->Location = System::Drawing::Point(213, 42);
+			this->name_label->Location = System::Drawing::Point(315, 105);
 			this->name_label->Name = L"name_label";
 			this->name_label->Size = System::Drawing::Size(81, 25);
 			this->name_label->TabIndex = 0;
@@ -98,7 +98,7 @@ namespace RTCW {
 			this->mark_label->AutoSize = true;
 			this->mark_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->mark_label->Location = System::Drawing::Point(448, 42);
+			this->mark_label->Location = System::Drawing::Point(305, 240);
 			this->mark_label->Name = L"mark_label";
 			this->mark_label->Size = System::Drawing::Size(82, 25);
 			this->mark_label->TabIndex = 1;
@@ -106,9 +106,9 @@ namespace RTCW {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(262, 416);
+			this->button1->Location = System::Drawing::Point(282, 363);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(155, 51);
+			this->button1->Size = System::Drawing::Size(131, 43);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Back";
 			this->button1->UseVisualStyleBackColor = true;
@@ -119,7 +119,7 @@ namespace RTCW {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(229, 207);
+			this->label1->Location = System::Drawing::Point(238, 150);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(236, 25);
 			this->label1->TabIndex = 1;
@@ -130,7 +130,7 @@ namespace RTCW {
 			this->correct_mis_label->AutoSize = true;
 			this->correct_mis_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->correct_mis_label->Location = System::Drawing::Point(310, 263);
+			this->correct_mis_label->Location = System::Drawing::Point(326, 194);
 			this->correct_mis_label->Name = L"correct_mis_label";
 			this->correct_mis_label->Size = System::Drawing::Size(43, 25);
 			this->correct_mis_label->TabIndex = 1;

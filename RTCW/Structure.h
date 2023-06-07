@@ -1,15 +1,15 @@
 #pragma once
 #include <stdio.h>
 
-struct question { //структура з даними
-	char question[60]; //Питання
-	char v1[60]; //Варіант 1
-	char v2[60]; //Варіант 2
-	char v3[60]; //Варіант 3
-	char v4[60]; //Варіант 4
-	int answer; //Номер відповіді
+struct question { 
+	char question[60]; 
+	char v1[60]; 
+	char v2[60]; 
+	char v3[60]; 
+	char v4[60]; 
+	int answer; 
 };
-typedef struct question S_Data;// створення власного типу
+typedef struct question S_Data;
 
 struct test
 {

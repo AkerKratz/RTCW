@@ -64,10 +64,11 @@ namespace RTCW {
 			this->richTextBox1->Size = System::Drawing::Size(758, 475);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = L"";
+			this->richTextBox1->TextChanged += gcnew System::EventHandler(this, &InfoStudent::richTextBox1_TextChanged);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(292, 12);
+			this->button1->Location = System::Drawing::Point(288, 12);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(175, 34);
 			this->button1->TabIndex = 1;
@@ -102,6 +103,8 @@ namespace RTCW {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
+	}
+	private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};
 }

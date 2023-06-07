@@ -139,9 +139,9 @@ namespace RTCW {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(261, 486);
+			this->button1->Location = System::Drawing::Point(261, 459);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(190, 61);
+			this->button1->Size = System::Drawing::Size(190, 44);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Add";
 			this->button1->UseVisualStyleBackColor = true;
@@ -161,11 +161,11 @@ namespace RTCW {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label7->Location = System::Drawing::Point(226, 350);
+			this->label7->Location = System::Drawing::Point(301, 370);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(225, 36);
+			this->label7->Size = System::Drawing::Size(99, 16);
 			this->label7->TabIndex = 3;
 			this->label7->Text = L"Another answer";
 			// 
@@ -406,9 +406,8 @@ namespace RTCW {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		FILE* file;
 		S_Data data;
-		if ((question_box->Text != "") && (question_A->Text != "") && (question_B->Text != "") && (question_C->Text != "") && (question_D->Text != "")) //якщо не порожні поля
+		if ((question_box->Text != "") && (question_A->Text != "") && (question_B->Text != "") && (question_C->Text != "") && (question_D->Text != ""))
 		{
-			//заповнення структури даних для тесту
 			strcpy(data.question,
 				(char*)(void*)Marshal::StringToHGlobalAnsi(question_box->Text));
 			strcpy(data.v1,
@@ -421,14 +420,14 @@ namespace RTCW {
 				(char*)(void*)Marshal::StringToHGlobalAnsi(question_D->Text));
 			int answer = what_answer();
 			if (answer == 0) {
-				MessageBox::Show("Не вибрана правильна відповідь!", "Error");
+				MessageBox::Show("!", "Error");
 			}
 			else {
 				data.answer = answer;
 
-				//очищення текстових полів
+				
 				clear_all_textBoxes();
-				file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\questions.bin", "ab");
+				file = fopen("another_data\\questions.bin", "ab");
 				fwrite(&data, sizeof(data), 1, file);
 				fclose(file);
 			}
@@ -444,7 +443,7 @@ private: System::Void Questions_Load(System::Object^ sender, System::EventArgs^ 
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	FILE* file;
-	file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\questions.bin", "wb");
+	file = fopen("another_data\\questions.bin", "wb");
 	fclose(file);
 	this->total_questions_label->Visible = false;
 	MessageBox::Show("Deleted succesfully!", "Succes!");

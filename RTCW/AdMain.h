@@ -76,11 +76,11 @@ namespace RTCW {
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(452, 412);
+			this->button7->Location = System::Drawing::Point(467, 412);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 23);
+			this->button7->Size = System::Drawing::Size(70, 23);
 			this->button7->TabIndex = 13;
-			this->button7->Text = L"Authorisation";
+			this->button7->Text = L"Exit";
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &AdMain::button7_Click);
 			// 

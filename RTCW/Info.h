@@ -1,3 +1,6 @@
+#include <fstream>
+#include <string>
+#include <Windows.h>
 #pragma once
 
 namespace RTCW {
@@ -41,6 +44,7 @@ namespace RTCW {
 
 
 
+
 	protected:
 
 	private:
@@ -73,7 +77,7 @@ namespace RTCW {
 			// 
 			// save_btn
 			// 
-			this->save_btn->Location = System::Drawing::Point(278, 12);
+			this->save_btn->Location = System::Drawing::Point(310, 12);
 			this->save_btn->Name = L"save_btn";
 			this->save_btn->Size = System::Drawing::Size(111, 39);
 			this->save_btn->TabIndex = 1;
@@ -95,6 +99,7 @@ namespace RTCW {
 			this->Name = L"Info";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Info";
+			this->Load += gcnew System::EventHandler(this, &Info::Info_Load);
 			this->ResumeLayout(false);
 
 		}
@@ -115,5 +120,12 @@ namespace RTCW {
 			MessageBox::Show("Error occurred while saving the file: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
-	};
+
+private: System::Void Info_Load(System::Object^ sender, System::EventArgs^ e) {
+	System::IO::StreamReader^ inputFile = gcnew System::IO::StreamReader("another_data\\info.txt");
+	String^ text = inputFile->ReadToEnd();
+	inputFile->Close();
+	richTextBox1->Text = text;
+}
+};
 }

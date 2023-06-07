@@ -128,11 +128,11 @@ namespace RTCW {
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(348, 333);
+			this->button7->Location = System::Drawing::Point(361, 334);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 23);
+			this->button7->Size = System::Drawing::Size(67, 23);
 			this->button7->TabIndex = 6;
-			this->button7->Text = L"Authorisation";
+			this->button7->Text = L"Exit";
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &Main::button7_Click);
 			// 
@@ -172,7 +172,7 @@ namespace RTCW {
 			name_label->Text = name;
 			Test_Data testreq;
 			FILE* file;
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\test_settings.txt", "r");
+			file = fopen("another_data\\test_settings.txt", "r");
 			fread(&testreq, sizeof(testreq), 1, file);
 			fclose(file);
 			time = testreq.question_time;
@@ -181,73 +181,75 @@ namespace RTCW {
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Hide();
-		System::Windows::Forms::DialogResult result = MessageBox::Show("Час тестування обмежений, а саме " + time.ToString() + "хв бажаєте продовжити?", "Підтвердження", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+		System::Windows::Forms::DialogResult result = MessageBox::Show("Do you want to start test?" + "You have" + time.ToString() + "minutes" , "Test", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 
 
-		std::ifstream file1("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\result_testing.txt");
-		std::regex loginRegex(R"(login:(.+))", std::regex_constants::icase);
+		if (result == System::Windows::Forms::DialogResult::Yes) {
+			std::ifstream file1("another_data\\result_testing.txt");
+			std::regex loginRegex(R"(login:(.+))", std::regex_constants::icase);
 
-		std::string login;
+			std::string login;
 
 
-		std::string line;
-		while (std::getline(file1, line)) {
-			std::smatch match;
+			std::string line;
+			while (std::getline(file1, line)) {
+				std::smatch match;
 
-			if (std::regex_search(line, match, loginRegex)) {
-				login = match[1];
+				if (std::regex_search(line, match, loginRegex)) {
+					login = match[1];
+				}
 			}
-		}
-		String^ login_r = marshal_as<String^>(login);
+			String^ login_r = marshal_as<String^>(login);
 
 
-		if (login_r == name) {
-			MessageBox::Show("Ви вже пройшли тестування!", "Помилка!");
-		}
-		else {
-			FILE* file;
-			Test_Data testreq;
-			file = fopen("another_data\\user_answers.bin", "wb");
-			fclose(file);
-			std::ifstream inputFile("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\questions.bin", std::ios::binary); // Читання з файлу
-			if (!inputFile) {
-				MessageBox::Show("Немає файлу", "А де?");
+			if (login_r == name) {
+				MessageBox::Show("You already complited the test!", "Error!");
 			}
-			std::vector<S_Data> questions;
-			S_Data question;
+			else {
+				FILE* file;
+				Test_Data testreq;
+				file = fopen("another_data\\user_answers.bin", "wb");
+				fclose(file);
+				std::ifstream inputFile("another_data\\questions.bin", std::ios::binary);
+				if (!inputFile) {
+					MessageBox::Show("Failed to open the file", "Error?");
+				}
+				std::vector<S_Data> questions;
+				S_Data question;
 
-			while (inputFile.read(reinterpret_cast<char*>(&question), sizeof(question))) {
-				questions.push_back(question);
+				while (inputFile.read(reinterpret_cast<char*>(&question), sizeof(question))) {
+					questions.push_back(question);
+				}
+				inputFile.close();
+
+				std::vector<size_t> indices(questions.size());
+				for (size_t i = 0; i < indices.size(); ++i) {
+					indices[i] = i;
+				}
+
+				std::random_device rd;
+				std::mt19937 generator(rd());
+				std::shuffle(indices.begin(), indices.end(), generator);
+
+				std::ofstream outputFile("another_data\\rand_questions.bin", std::ios::binary);
+
+				file = fopen("another_data\\test_settings.txt", "r");
+				fread(&testreq, sizeof(testreq), 1, file);
+				fclose(file);
+
+				for (size_t i = 0; i < testreq.qc; ++i) {
+					const auto& q = questions[indices[i]];
+					outputFile.write(reinterpret_cast<const char*>(&q), sizeof(q));
+				}
+
+				file1.close();
+				outputFile.close();
+
+				this->Hide();
+				Test^ testForm = gcnew Test(name);
+				testForm->ShowDialog();
+				this->Show();
 			}
-			inputFile.close();
-
-			std::vector<size_t> indices(questions.size()); // Створюється масив індексів
-			for (size_t i = 0; i < indices.size(); ++i) { // Розмір масиву це розмір масиву індексів - розмір масиву структур
-				indices[i] = i;
-			}
-
-			std::random_device rd;// rd - змінна, в яку записується непередбачуване випадкове число
-			std::mt19937 generator(rd());// Ініціалізація генератора псевдовипадкових чисел на основі алгоритму Вихор Мерсенна
-			std::shuffle(indices.begin(), indices.end(), generator);// Перемішування елементів в заданому діапазоні генератором випадкових чисел
-
-			std::ofstream outputFile("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\rand_questions.bin", std::ios::binary);
-
-			file = fopen("C:\\Users\\akerk\\source\\repos\\RTCW\\RTCW\\another_data\\test_settings.txt", "r");
-			fread(&testreq, sizeof(testreq), 1, file);
-			fclose(file);
-
-			for (size_t i = 0; i < testreq.qc; ++i) { // Вказуємо к-сть питать задану адміністратором
-				const auto& q = questions[indices[i]];
-				outputFile.write(reinterpret_cast<const char*>(&q), sizeof(q));
-			}
-
-			file1.close();
-			outputFile.close();
-
-			this->Hide();
-			Test^ testForm = gcnew Test(name);
-			testForm->ShowDialog();
-			this->Show();
 		}
 		}
 
