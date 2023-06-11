@@ -82,7 +82,7 @@ namespace RTCW {
 	private: System::Windows::Forms::Label^ questions_label;
 
 
-	private: System::Windows::Forms::Button^ save_answers_button;
+
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::RichTextBox^ question_box;
 	private: System::Windows::Forms::RichTextBox^ question_A;
@@ -99,6 +99,7 @@ namespace RTCW {
 	private: System::Windows::Forms::RadioButton^ answer_C;
 	private: System::Windows::Forms::RadioButton^ answer_D;
 	private: System::Windows::Forms::RadioButton^ answer_E;
+	private: System::Windows::Forms::RichTextBox^ question_E;
 
 
 
@@ -134,7 +135,6 @@ namespace RTCW {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->timer_label = (gcnew System::Windows::Forms::Label());
 			this->questions_label = (gcnew System::Windows::Forms::Label());
-			this->save_answers_button = (gcnew System::Windows::Forms::Button());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->question_box = (gcnew System::Windows::Forms::RichTextBox());
 			this->question_A = (gcnew System::Windows::Forms::RichTextBox());
@@ -146,13 +146,14 @@ namespace RTCW {
 			this->answer_C = (gcnew System::Windows::Forms::RadioButton());
 			this->answer_D = (gcnew System::Windows::Forms::RadioButton());
 			this->answer_E = (gcnew System::Windows::Forms::RadioButton());
+			this->question_E = (gcnew System::Windows::Forms::RichTextBox());
 			this->SuspendLayout();
 			// 
 			// left_button
 			// 
-			this->left_button->Location = System::Drawing::Point(160, 466);
+			this->left_button->Location = System::Drawing::Point(171, 395);
 			this->left_button->Name = L"left_button";
-			this->left_button->Size = System::Drawing::Size(75, 23);
+			this->left_button->Size = System::Drawing::Size(75, 62);
 			this->left_button->TabIndex = 0;
 			this->left_button->Text = L"previous";
 			this->left_button->UseVisualStyleBackColor = true;
@@ -160,9 +161,9 @@ namespace RTCW {
 			// 
 			// right_button
 			// 
-			this->right_button->Location = System::Drawing::Point(397, 466);
+			this->right_button->Location = System::Drawing::Point(408, 395);
 			this->right_button->Name = L"right_button";
-			this->right_button->Size = System::Drawing::Size(75, 23);
+			this->right_button->Size = System::Drawing::Size(75, 62);
 			this->right_button->TabIndex = 1;
 			this->right_button->Text = L"next";
 			this->right_button->UseVisualStyleBackColor = true;
@@ -180,7 +181,7 @@ namespace RTCW {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(266, 408);
+			this->button4->Location = System::Drawing::Point(274, 355);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(103, 34);
 			this->button4->TabIndex = 12;
@@ -209,16 +210,6 @@ namespace RTCW {
 			this->questions_label->Text = L"Somewhat";
 			this->questions_label->Click += gcnew System::EventHandler(this, &Test::questions_label_Click);
 			// 
-			// save_answers_button
-			// 
-			this->save_answers_button->Location = System::Drawing::Point(241, 448);
-			this->save_answers_button->Name = L"save_answers_button";
-			this->save_answers_button->Size = System::Drawing::Size(150, 58);
-			this->save_answers_button->TabIndex = 30;
-			this->save_answers_button->Text = L"Save";
-			this->save_answers_button->UseVisualStyleBackColor = true;
-			this->save_answers_button->Click += gcnew System::EventHandler(this, &Test::save_answers_button_Click);
-			// 
 			// timer1
 			// 
 			this->timer1->Tick += gcnew System::EventHandler(this, &Test::timer1_Tick);
@@ -233,7 +224,7 @@ namespace RTCW {
 			// 
 			// question_A
 			// 
-			this->question_A->Location = System::Drawing::Point(192, 122);
+			this->question_A->Location = System::Drawing::Point(192, 130);
 			this->question_A->Name = L"question_A";
 			this->question_A->Size = System::Drawing::Size(280, 39);
 			this->question_A->TabIndex = 31;
@@ -241,32 +232,32 @@ namespace RTCW {
 			// 
 			// question_B
 			// 
-			this->question_B->Location = System::Drawing::Point(192, 183);
+			this->question_B->Location = System::Drawing::Point(192, 175);
 			this->question_B->Name = L"question_B";
-			this->question_B->Size = System::Drawing::Size(280, 38);
+			this->question_B->Size = System::Drawing::Size(280, 39);
 			this->question_B->TabIndex = 31;
 			this->question_B->Text = L"";
 			// 
 			// question_C
 			// 
-			this->question_C->Location = System::Drawing::Point(192, 244);
+			this->question_C->Location = System::Drawing::Point(192, 220);
 			this->question_C->Name = L"question_C";
-			this->question_C->Size = System::Drawing::Size(280, 37);
+			this->question_C->Size = System::Drawing::Size(280, 39);
 			this->question_C->TabIndex = 31;
 			this->question_C->Text = L"";
 			// 
 			// question_D
 			// 
-			this->question_D->Location = System::Drawing::Point(192, 305);
+			this->question_D->Location = System::Drawing::Point(192, 265);
 			this->question_D->Name = L"question_D";
-			this->question_D->Size = System::Drawing::Size(280, 43);
+			this->question_D->Size = System::Drawing::Size(280, 39);
 			this->question_D->TabIndex = 31;
 			this->question_D->Text = L"";
 			// 
 			// answer_A
 			// 
 			this->answer_A->AutoSize = true;
-			this->answer_A->Location = System::Drawing::Point(149, 141);
+			this->answer_A->Location = System::Drawing::Point(149, 140);
 			this->answer_A->Name = L"answer_A";
 			this->answer_A->Size = System::Drawing::Size(37, 20);
 			this->answer_A->TabIndex = 32;
@@ -277,7 +268,7 @@ namespace RTCW {
 			// answer_B
 			// 
 			this->answer_B->AutoSize = true;
-			this->answer_B->Location = System::Drawing::Point(149, 201);
+			this->answer_B->Location = System::Drawing::Point(149, 185);
 			this->answer_B->Name = L"answer_B";
 			this->answer_B->Size = System::Drawing::Size(37, 20);
 			this->answer_B->TabIndex = 32;
@@ -288,7 +279,7 @@ namespace RTCW {
 			// answer_C
 			// 
 			this->answer_C->AutoSize = true;
-			this->answer_C->Location = System::Drawing::Point(149, 261);
+			this->answer_C->Location = System::Drawing::Point(149, 230);
 			this->answer_C->Name = L"answer_C";
 			this->answer_C->Size = System::Drawing::Size(37, 20);
 			this->answer_C->TabIndex = 32;
@@ -299,7 +290,7 @@ namespace RTCW {
 			// answer_D
 			// 
 			this->answer_D->AutoSize = true;
-			this->answer_D->Location = System::Drawing::Point(149, 316);
+			this->answer_D->Location = System::Drawing::Point(148, 275);
 			this->answer_D->Name = L"answer_D";
 			this->answer_D->Size = System::Drawing::Size(38, 20);
 			this->answer_D->TabIndex = 32;
@@ -310,19 +301,30 @@ namespace RTCW {
 			// answer_E
 			// 
 			this->answer_E->AutoSize = true;
-			this->answer_E->Location = System::Drawing::Point(149, 369);
+			this->answer_E->Location = System::Drawing::Point(148, 320);
 			this->answer_E->Name = L"answer_E";
 			this->answer_E->Size = System::Drawing::Size(37, 20);
 			this->answer_E->TabIndex = 32;
 			this->answer_E->TabStop = true;
 			this->answer_E->Text = L"E";
 			this->answer_E->UseVisualStyleBackColor = true;
+			this->answer_E->CheckedChanged += gcnew System::EventHandler(this, &Test::answer_E_CheckedChanged);
+			// 
+			// question_E
+			// 
+			this->question_E->Location = System::Drawing::Point(192, 310);
+			this->question_E->Name = L"question_E";
+			this->question_E->ReadOnly = true;
+			this->question_E->Size = System::Drawing::Size(280, 39);
+			this->question_E->TabIndex = 33;
+			this->question_E->Text = L"Another answer";
 			// 
 			// Test
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(675, 540);
+			this->ClientSize = System::Drawing::Size(654, 469);
+			this->Controls->Add(this->question_E);
 			this->Controls->Add(this->answer_E);
 			this->Controls->Add(this->answer_D);
 			this->Controls->Add(this->answer_C);
@@ -333,7 +335,6 @@ namespace RTCW {
 			this->Controls->Add(this->question_B);
 			this->Controls->Add(this->question_A);
 			this->Controls->Add(this->question_box);
-			this->Controls->Add(this->save_answers_button);
 			this->Controls->Add(this->questions_label);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->timer_label);
@@ -513,7 +514,6 @@ namespace RTCW {
 	}
 
 private: System::Void Test_Load(System::Object^ sender, System::EventArgs^ e) {
-	this->save_answers_button->Visible = false;
 	timer1->Interval = 1000;
 	timer1->Start();
 	FILE* file;
@@ -584,11 +584,9 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 
 				if (currentPos >= totalStructures - 1) {
 					right_button->Enabled = false;
-					this->save_answers_button->Visible = true;
 				}
 				if (count == CountRandStructuresInFile()) {
 					right_button->Enabled = false;
-					this->save_answers_button->Visible = true;
 				}
 			}
 		}
@@ -611,7 +609,6 @@ private: System::Void left_button_Click(System::Object ^ sender, System::EventAr
 		currentPos--; 
 		StructurePositionLeft(currentPos);
 		right_button->Enabled = true;
-		this->save_answers_button->Visible = false;
 
 		if (currentPos <= 0) {
 			left_button->Enabled = false;
@@ -631,26 +628,44 @@ private: System::Void left_button_Click(System::Object ^ sender, System::EventAr
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) { // end button
 	FILE* file;
 	Test_Data testreq;
+	S_Data data;
+
+	if (right_button->Enabled == false) {
+		timer1->Stop();
+		strcpy(data.question, (char*)(void*)Marshal::StringToHGlobalAnsi(question_box->Text));
+		strcpy(data.v1, (char*)(void*)Marshal::StringToHGlobalAnsi(question_A->Text));
+		strcpy(data.v2, (char*)(void*)Marshal::StringToHGlobalAnsi(question_B->Text));
+		strcpy(data.v3, (char*)(void*)Marshal::StringToHGlobalAnsi(question_C->Text));
+		strcpy(data.v4, (char*)(void*)Marshal::StringToHGlobalAnsi(question_D->Text));
+
+		int answer = what_answer();
+		data.answer = answer;
+
+		file = fopen("another_data\\user_answers.bin", "r+b");
+		if (file != NULL) {
+			fseek(file, currentPos * sizeof(data), SEEK_SET);
+			fwrite(&data, sizeof(data), 1, file);
+			fclose(file);
+		}
+	}
+
 	file = fopen("another_data\\test_settings.txt", "r");
 	fread(&testreq, sizeof(testreq), 1, file);
 	fclose(file);
-	if (CountUsersStructuresInFile() == testreq.qc) {
-		timer1->Stop();
-		MessageBox::Show("Test is finished. Check results in \"results\"", "Well done!");
-		this->Hide();
-	}
-	else
-		MessageBox::Show("Answer isn`t saved!", "Error!");
+
+
+	MessageBox::Show("Test is finished. Check results in \"results\"", "Well done!");
+	this->Hide();
 
 	std::ifstream inputFile("another_data\\questions.bin", std::ios::binary);
 	if (!inputFile) {
 		MessageBox::Show("Failed to open file.", "Error!");
 	}
 	std::vector<question> questions;
-	question data;
+	question data1;
 
-	while (inputFile.read(reinterpret_cast<char*>(&data), sizeof(data))) {
-		questions.push_back(data);
+	while (inputFile.read(reinterpret_cast<char*>(&data1), sizeof(data1))) {
+		questions.push_back(data1);
 	}
 	inputFile.close();
 
@@ -710,6 +725,8 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 		outputFile << "Login:" << student_name_str << std::endl;
 		outputFile << "Questions:" << CountRandStructuresInFile() << std::endl;
 		outputFile << "Correct:" << count_right << std::endl;
+		if(count_mis == 0 && CountUsersStructuresInFile() < testreq.qc)
+			count_mis = CountRandStructuresInFile() - count_right;
 		outputFile << "Mistakes:" << count_mis << std::endl;
 		outputFile << "Mark:" << mark << std::endl;
 		outputFile << std::endl;
@@ -722,27 +739,6 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	clear_check();
-}
-private: System::Void save_answers_button_Click(System::Object^ sender, System::EventArgs^ e) {
-	FILE* file;
-	S_Data data;
-	if (right_button->Enabled == false) {
-		strcpy(data.question, (char*)(void*)Marshal::StringToHGlobalAnsi(question_box->Text));
-		strcpy(data.v1, (char*)(void*)Marshal::StringToHGlobalAnsi(question_A->Text));
-		strcpy(data.v2, (char*)(void*)Marshal::StringToHGlobalAnsi(question_B->Text));
-		strcpy(data.v3, (char*)(void*)Marshal::StringToHGlobalAnsi(question_C->Text));
-		strcpy(data.v4, (char*)(void*)Marshal::StringToHGlobalAnsi(question_D->Text));
-
-		int answer = what_answer();
-		data.answer = answer;
-
-		file = fopen("another_data\\user_answers.bin", "r+b");
-		if (file != NULL) {
-			fseek(file, currentPos * sizeof(data), SEEK_SET);
-			fwrite(&data, sizeof(data), 1, file); 
-			fclose(file);
-		}
-	}
 }
 	   int timer_value = 0;
 		private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
@@ -772,10 +768,122 @@ private: System::Void save_answers_button_Click(System::Object^ sender, System::
 			if (timer_value >= time * 60) {
 				timer1->Stop();
 				MessageBox::Show("Time`s up!", "Test is finished");
+
+				FILE* file;
+				Test_Data testreq;
+				S_Data data;
+
+				if (right_button->Enabled == false) {
+					strcpy(data.question, (char*)(void*)Marshal::StringToHGlobalAnsi(question_box->Text));
+					strcpy(data.v1, (char*)(void*)Marshal::StringToHGlobalAnsi(question_A->Text));
+					strcpy(data.v2, (char*)(void*)Marshal::StringToHGlobalAnsi(question_B->Text));
+					strcpy(data.v3, (char*)(void*)Marshal::StringToHGlobalAnsi(question_C->Text));
+					strcpy(data.v4, (char*)(void*)Marshal::StringToHGlobalAnsi(question_D->Text));
+
+					int answer = what_answer();
+					data.answer = answer;
+
+					file = fopen("another_data\\user_answers.bin", "r+b");
+					if (file != NULL) {
+						fseek(file, currentPos * sizeof(data), SEEK_SET);
+						fwrite(&data, sizeof(data), 1, file);
+						fclose(file);
+					}
+				}
+
+				file = fopen("another_data\\test_settings.txt", "r");
+				fread(&testreq, sizeof(testreq), 1, file);
+				fclose(file);
+					
+				timer1->Stop();
+				MessageBox::Show("Test is finished. Check results in \"results\"", "Well done!");
+				this->Hide();
+
+				std::ifstream inputFile("another_data\\questions.bin", std::ios::binary);
+				if (!inputFile) {
+					MessageBox::Show("Failed to open file.", "Error!");
+				}
+				std::vector<question> questions;
+				question data1;
+
+				while (inputFile.read(reinterpret_cast<char*>(&data1), sizeof(data1))) {
+					questions.push_back(data1);
+				}
+				inputFile.close();
+
+				std::ifstream inputFile2("another_data\\user_answers.bin", std::ios::binary);
+				if (!inputFile2) {
+					MessageBox::Show("Failed to open file.", "Error!");
+				}
+
+				std::vector<question> answers;
+				question data2;
+
+				while (inputFile2.read(reinterpret_cast<char*>(&data2), sizeof(data2))) {
+					answers.push_back(data2);
+				}
+				inputFile2.close();
+
+
+				std::sort(questions.begin(), questions.end(), QuestionComparer);
+				std::sort(answers.begin(), answers.end(), QuestionComparer);
+
+
+				double mark = 0;
+				int count_mis = 0;
+				int count_right = 0;
+				size_t questionsSize = questions.size();
+				size_t answersSize = answers.size();
+				size_t i = 0;
+				size_t j = 0;
+
+				while (i < questionsSize && j < answersSize) {
+					int comparison = std::strcmp(questions[i].question, answers[j].question);
+					if (comparison == 0) {
+						if (questions[i].answer == answers[j].answer) {
+							mark += testreq.mark;
+							count_right++;
+						}
+						else {
+							count_mis++;
+						}
+						i++;
+						j++;
+					}
+					else if (comparison < 0) {
+						i++;
+
+					}
+					else {
+						j++;
+					}
+				}
+				std::ofstream outputFile("another_data\\result_testing.txt", std::ios::app);
+
+				if (outputFile) {
+					std::string student_name_str;
+					marshal_context context;
+					student_name_str = context.marshal_as<std::string>(student);
+					outputFile << "Login:" << student_name_str << std::endl;
+					outputFile << "Questions:" << CountRandStructuresInFile() << std::endl;
+					outputFile << "Correct:" << count_right << std::endl;
+					if (count_mis == 0 && CountUsersStructuresInFile() < testreq.qc)
+						count_mis = CountRandStructuresInFile() - count_right;
+					outputFile << "Mistakes:" << count_mis << std::endl;
+					outputFile << "Mark:" << mark << std::endl;
+					outputFile << std::endl;
+					outputFile.close();
+				}
+				else {
+					MessageBox::Show("Failed to open file.", "Error!");
+				}
+
 				this->Close();
 			}
 		}
 private: System::Void questions_label_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void answer_E_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

@@ -67,7 +67,7 @@ namespace RTCW {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(384, 245);
+			this->button1->Location = System::Drawing::Point(204, 236);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 30);
 			this->button1->TabIndex = 0;
@@ -77,7 +77,7 @@ namespace RTCW {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(569, 245);
+			this->button2->Location = System::Drawing::Point(389, 236);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 30);
 			this->button2->TabIndex = 1;
@@ -87,7 +87,7 @@ namespace RTCW {
 			// 
 			// login_box
 			// 
-			this->login_box->Location = System::Drawing::Point(468, 111);
+			this->login_box->Location = System::Drawing::Point(288, 102);
 			this->login_box->Name = L"login_box";
 			this->login_box->Size = System::Drawing::Size(100, 22);
 			this->login_box->TabIndex = 2;
@@ -95,7 +95,7 @@ namespace RTCW {
 			// 
 			// password_box
 			// 
-			this->password_box->Location = System::Drawing::Point(468, 166);
+			this->password_box->Location = System::Drawing::Point(288, 157);
 			this->password_box->Name = L"password_box";
 			this->password_box->Size = System::Drawing::Size(100, 22);
 			this->password_box->TabIndex = 3;
@@ -104,7 +104,7 @@ namespace RTCW {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(497, 92);
+			this->label1->Location = System::Drawing::Point(317, 83);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(40, 16);
 			this->label1->TabIndex = 4;
@@ -113,7 +113,7 @@ namespace RTCW {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(484, 147);
+			this->label2->Location = System::Drawing::Point(304, 138);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(67, 16);
 			this->label2->TabIndex = 5;
@@ -123,7 +123,7 @@ namespace RTCW {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1002, 509);
+			this->ClientSize = System::Drawing::Size(656, 395);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->password_box);

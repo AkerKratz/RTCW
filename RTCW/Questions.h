@@ -94,6 +94,7 @@ namespace RTCW {
 	private: System::Windows::Forms::RadioButton^ answer_C;
 	private: System::Windows::Forms::RadioButton^ answer_D;
 	private: System::Windows::Forms::RadioButton^ answer_E;
+	private: System::Windows::Forms::Button^ button3;
 
 
 
@@ -135,6 +136,7 @@ namespace RTCW {
 			this->answer_C = (gcnew System::Windows::Forms::RadioButton());
 			this->answer_D = (gcnew System::Windows::Forms::RadioButton());
 			this->answer_E = (gcnew System::Windows::Forms::RadioButton());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -319,11 +321,22 @@ namespace RTCW {
 			this->answer_E->Text = L"Right answer";
 			this->answer_E->UseVisualStyleBackColor = true;
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(638, 39);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(93, 34);
+			this->button3->TabIndex = 8;
+			this->button3->Text = L"Main Menu";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Questions::button3_Click);
+			// 
 			// Questions
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(800, 600);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->answer_E);
 			this->Controls->Add(this->answer_D);
 			this->Controls->Add(this->answer_C);
@@ -447,6 +460,9 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	fclose(file);
 	this->total_questions_label->Visible = false;
 	MessageBox::Show("Deleted succesfully!", "Succes!");
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
 }
 };
 }

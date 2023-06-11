@@ -41,6 +41,7 @@ namespace RTCW {
 
 	private: System::Windows::Forms::Button^ save_btn;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
+	private: System::Windows::Forms::Button^ button1;
 
 
 
@@ -63,6 +64,7 @@ namespace RTCW {
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->save_btn = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// richTextBox1
@@ -77,7 +79,7 @@ namespace RTCW {
 			// 
 			// save_btn
 			// 
-			this->save_btn->Location = System::Drawing::Point(310, 12);
+			this->save_btn->Location = System::Drawing::Point(137, 11);
 			this->save_btn->Name = L"save_btn";
 			this->save_btn->Size = System::Drawing::Size(111, 39);
 			this->save_btn->TabIndex = 1;
@@ -89,11 +91,22 @@ namespace RTCW {
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(556, 11);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(92, 39);
+			this->button1->TabIndex = 2;
+			this->button1->Text = L"Main Menu";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Info::button1_Click);
+			// 
 			// Info
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(782, 553);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->save_btn);
 			this->Controls->Add(this->richTextBox1);
 			this->Name = L"Info";
@@ -126,6 +139,9 @@ private: System::Void Info_Load(System::Object^ sender, System::EventArgs^ e) {
 	String^ text = inputFile->ReadToEnd();
 	inputFile->Close();
 	richTextBox1->Text = text;
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
 }
 };
 }

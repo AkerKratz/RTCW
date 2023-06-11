@@ -68,11 +68,11 @@ namespace RTCW {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(288, 12);
+			this->button1->Location = System::Drawing::Point(313, 12);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(175, 34);
 			this->button1->TabIndex = 1;
-			this->button1->Text = L"Back";
+			this->button1->Text = L"Main Menu";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &InfoStudent::button1_Click);
 			// 

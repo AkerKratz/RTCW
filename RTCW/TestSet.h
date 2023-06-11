@@ -78,7 +78,7 @@ namespace RTCW {
 			// 
 			// question_count_box
 			// 
-			this->question_count_box->Location = System::Drawing::Point(302, 181);
+			this->question_count_box->Location = System::Drawing::Point(35, 102);
 			this->question_count_box->Name = L"question_count_box";
 			this->question_count_box->Size = System::Drawing::Size(150, 22);
 			this->question_count_box->TabIndex = 0;
@@ -86,7 +86,7 @@ namespace RTCW {
 			// 
 			// time_box
 			// 
-			this->time_box->Location = System::Drawing::Point(596, 181);
+			this->time_box->Location = System::Drawing::Point(329, 102);
 			this->time_box->Name = L"time_box";
 			this->time_box->Size = System::Drawing::Size(128, 22);
 			this->time_box->TabIndex = 1;
@@ -95,7 +95,7 @@ namespace RTCW {
 			// mark_label
 			// 
 			this->mark_label->AutoSize = true;
-			this->mark_label->Location = System::Drawing::Point(464, 257);
+			this->mark_label->Location = System::Drawing::Point(197, 178);
 			this->mark_label->Name = L"mark_label";
 			this->mark_label->Size = System::Drawing::Size(104, 16);
 			this->mark_label->TabIndex = 3;
@@ -103,7 +103,7 @@ namespace RTCW {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(456, 333);
+			this->button2->Location = System::Drawing::Point(189, 254);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(112, 44);
 			this->button2->TabIndex = 4;
@@ -113,7 +113,7 @@ namespace RTCW {
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(456, 406);
+			this->button5->Location = System::Drawing::Point(189, 327);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(112, 39);
 			this->button5->TabIndex = 27;
@@ -124,7 +124,7 @@ namespace RTCW {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(314, 139);
+			this->label1->Location = System::Drawing::Point(47, 60);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(122, 16);
 			this->label1->TabIndex = 28;
@@ -134,7 +134,7 @@ namespace RTCW {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(635, 139);
+			this->label2->Location = System::Drawing::Point(368, 60);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(38, 16);
 			this->label2->TabIndex = 29;
@@ -144,7 +144,7 @@ namespace RTCW {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1058, 542);
+			this->ClientSize = System::Drawing::Size(483, 430);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button5);
