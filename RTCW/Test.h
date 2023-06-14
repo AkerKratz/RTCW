@@ -205,9 +205,9 @@ namespace RTCW {
 			this->questions_label->AutoSize = true;
 			this->questions_label->Location = System::Drawing::Point(293, 28);
 			this->questions_label->Name = L"questions_label";
-			this->questions_label->Size = System::Drawing::Size(70, 16);
+			this->questions_label->Size = System::Drawing::Size(89, 16);
 			this->questions_label->TabIndex = 29;
-			this->questions_label->Text = L"Somewhat";
+			this->questions_label->Text = L"Task Number";
 			this->questions_label->Click += gcnew System::EventHandler(this, &Test::questions_label_Click);
 			// 
 			// timer1
@@ -218,6 +218,7 @@ namespace RTCW {
 			// 
 			this->question_box->Location = System::Drawing::Point(192, 51);
 			this->question_box->Name = L"question_box";
+			this->question_box->ReadOnly = true;
 			this->question_box->Size = System::Drawing::Size(280, 55);
 			this->question_box->TabIndex = 31;
 			this->question_box->Text = L"";
@@ -226,6 +227,7 @@ namespace RTCW {
 			// 
 			this->question_A->Location = System::Drawing::Point(192, 130);
 			this->question_A->Name = L"question_A";
+			this->question_A->ReadOnly = true;
 			this->question_A->Size = System::Drawing::Size(280, 39);
 			this->question_A->TabIndex = 31;
 			this->question_A->Text = L"";
@@ -234,6 +236,7 @@ namespace RTCW {
 			// 
 			this->question_B->Location = System::Drawing::Point(192, 175);
 			this->question_B->Name = L"question_B";
+			this->question_B->ReadOnly = true;
 			this->question_B->Size = System::Drawing::Size(280, 39);
 			this->question_B->TabIndex = 31;
 			this->question_B->Text = L"";
@@ -242,6 +245,7 @@ namespace RTCW {
 			// 
 			this->question_C->Location = System::Drawing::Point(192, 220);
 			this->question_C->Name = L"question_C";
+			this->question_C->ReadOnly = true;
 			this->question_C->Size = System::Drawing::Size(280, 39);
 			this->question_C->TabIndex = 31;
 			this->question_C->Text = L"";
@@ -250,6 +254,7 @@ namespace RTCW {
 			// 
 			this->question_D->Location = System::Drawing::Point(192, 265);
 			this->question_D->Name = L"question_D";
+			this->question_D->ReadOnly = true;
 			this->question_D->Size = System::Drawing::Size(280, 39);
 			this->question_D->TabIndex = 31;
 			this->question_D->Text = L"";
